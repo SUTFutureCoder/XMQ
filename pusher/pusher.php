@@ -11,13 +11,16 @@
  */
 define('APPPATH', __DIR__);
 define('CLIFILE', __FILE__);
+require_once 'lib/ConfigLoader.php';
 spl_autoload_register(function ($class){
-    require  '../util/' . $class . '.php';
+    require_once '../util/' . $class . '.php';
 });
 
 while (true){
     try {
-        throw new Exception('fatal', 404);
+        print_r(ConfigLoader::getTopics());
+        sleep(1);
+
     } catch (Exception $e){
         MLog::fatal(CoreConst::MODULE_PUSHER, 'PUSHER FATAL ERROR [code]' . $e->getCode() . ' [exception]' . json_encode($e->getMessage()));
     }
